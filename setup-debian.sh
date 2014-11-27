@@ -477,9 +477,11 @@ function install_site {
 
 	# Setup default index.html file
 	cat > "/var/www/$1/public/index.html" <<END
-	<?php print "Anda Berhasil Menambahkan Domain<br/> 
-	Untuk menghapus file ini masuk pada /var/www/namadomain.com/public<br/>
-	Hapus index.html"; ?>
+Anda Berhasil Menambahkan Domain<br/> 
+Untuk menghapus file ini masuk pada /var/www/namadomain.com/public<br/>
+Hapus index.html<br/>
+<br/>
+Untuk instalasi Wordpress bisa kesini <a href="https://www.worldcircle.net/index.php/kb/tutorial/cara-install-wordpress">CARA INSTALL WORDPRESS</a>
 END
 
 	# Setup test phpinfo.php file
@@ -548,11 +550,11 @@ function install_wordpress {
 	mkdir /var/www/$1/public
 
 	# Downloading the WordPress' latest and greatest distribution.
-    mkdir /tmp/wordpress.$$
-    wget -O - http://wordpress.org/latest.tar.gz | \
-        tar zxf - -C /tmp/wordpress.$$
-    cp -a /tmp/wordpress.$$/wordpress/. "/var/www/$1/public"
-    rm -rf /tmp/wordpress.$$
+    mkdir /tmp/wordpress/
+    wget --no-check-certificate http://wordpress.org/latest.zip | \
+        unzip latest.zip /tmp/wordpress/
+    cp -a /tmp/wordpress/wordpress/. "/var/www/$1/public"
+    rm -rf /tmp/wordpress/
 
 	# Setting up the MySQL database
     dbname=`echo $1 | tr . _`
